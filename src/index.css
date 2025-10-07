@@ -1,6 +1,8 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
 @theme {
+  --font-josefin: "Josefin Sans", sans-serif;
   --color-Blue-500: hsl(220, 98%, 61%);
   --color-Check-Background: linear-gradient(
     hsl(192, 100%, 67%),

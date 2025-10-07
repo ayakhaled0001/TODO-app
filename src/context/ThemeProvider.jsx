@@ -3,19 +3,27 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext();
 
 function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("light");
-  useEffect(
-    function () {
-      localStorage.setItem("theme", theme);
+  // Use functional initialization to read from localStorage immediately
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme");
-      if (savedTheme == "light") {
-        setTheme("light");
-      } else {
-        setTheme("dark");
-      }
-    },
-    [theme]
-  );
+      console.log("Initializing theme from localStorage:", savedTheme);
+      return savedTheme === "dark" ? "dark" : "light";
+    }
+    return "light";
+  });
+
+  // Save theme to localStorage whenever it changes
+  useEffect(() => {
+    console.log("Saving theme to localStorage:", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  // Debug: log current theme
+  useEffect(() => {
+    console.log("Current theme:", theme);
+  }, [theme]);
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
