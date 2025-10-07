@@ -29,7 +29,7 @@ function Body() {
                   theme == "light"
                     ? "border-b-Gray-600-dark"
                     : "border-b-Gray-50 "
-                } p-3 flex items-center gap-4`}>
+                } p-3 flex items-center gap-4 element`}>
               <input
                 type="checkbox"
                 checked={el.completed}
@@ -59,6 +59,13 @@ function Body() {
                   }`}>
                 {el.content}
               </p>
+              <img
+                src="images/icon-cross.svg"
+                className="cursor-pointer hidden close-btn"
+                onClick={() =>
+                  dispatch({ type: "DELETE_NOTE", payload: el.id })
+                }
+              />
             </div>
           ))}
         </div>
